@@ -23,6 +23,23 @@ btns.forEach(btn=>(
     formAct.textContent = activity
 
    })
-
-
 ))
+
+form.addEventListener("submit",(e)=>{
+  // handle page for refreshing
+  e.preventDefault()
+  const distance = parseInt(input.value)
+  if(distance){
+    db.collection("activities").add({
+      distance,
+      activity,
+      data: new Date().toString()
+    }).then(()=>{
+      error.textContent = ""
+      input.value = ""
+    })
+  }else{
+    error.textContent = "Please Enter the vaild distance"
+  }
+
+})
