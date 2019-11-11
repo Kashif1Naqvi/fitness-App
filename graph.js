@@ -1,45 +1,35 @@
-let btns =  document.querySelectorAll("button")
-let form = document.querySelector("form")
-let formAct  = document.querySelector("form span")
-let input = document.querySelector("input")
-let error = document.querySelector(".error")
-var activity = "cycling"
+let margin ={top:40 , left:100 , right:20 , bottom:50}
+let graphWidth = 560 - margin.left - margin.right
+let graphHeight = 400 - margin.top - margin.bottom
 
-btns.forEach(btn=>(
-   btn.addEventListener("click",e=>{
-     // get activity
-     activity = e.target.dataset.activity
+let svg = d3.select(".canvas").append("svg")
+            .attr("width",graphWidth+ margin.left + margin.right)
+            .attr("height",graphHeight + margin.top + margin.bottom)
+let graph = svg.append("g")
+               .attr("height",graphHeight)
+               .attr("width",graphWidth)
+               .attr("transform",`translate(${margin.left},${margin.top})`)
 
-     // removing activity and add active class
+const update = (data) => {
 
-     btns.forEach(btn=>btn.classList.remove("active"))
+}
 
-     e.target.classList.add("active")
-    //  console.log(e.target.classList.add("active"));
-    //  // set input field id
-    //
-    input.setAttribute("id" , activity)
-    // console.log(input.setAttribute("id" , activity));
-    formAct.textContent = activity
-
-   })
-))
-
-form.addEventListener("submit",(e)=>{
-  // handle page for refreshing
-  e.preventDefault()
-  const distance = parseInt(input.value)
-  if(distance){
-    db.collection("activities").add({
-      distance,
-      activity,
-      data: new Date().toString()
-    }).then(()=>{
-      error.textContent = ""
-      input.value = ""
-    })
-  }else{
-    error.textContent = "Please Enter the vaild distance"
-  }
-
+var data = [];
+db.collection("activities").onSnapshot(res=>{
+  res.docChanges().forEach(change => {
+    let doc = { ...change.doc.data(), id:change.doc.id  };
+    switch(change.type){
+      case 'added':
+        data.push(doc);
+        break;
+      case 'modified':
+        let index  = data.findIndex(item => doc.item  == doc.id  );
+        data[index] = doc;
+        break;
+      case 'removed':
+        data.filter( item =>  item.id !== doc.id );
+        break;
+    }
+  })
+  update(data)
 })
