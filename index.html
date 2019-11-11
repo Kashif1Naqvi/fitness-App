@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <title>Dont charset</title>
+  </head>
+  <body>
+    <style>
+      body{
+        background-image:url(images/bg.jpg);
+        background-size: cover;
+      }
+      .text-line {
+          background-color: transparent;
+          color: #fff;
+          outline: none;
+          outline-style: none;
+          border-top: none;
+          border-left: none;
+          border-right: none;
+          border-bottom: solid #eeeddd 2px;
+          padding: 13px 13px;
+      }
+      button{
+        background-color: #333 !important;
+        margin-bottom: 20px;
+        width: 100%;
+        padding: 16px;
+        font-size: 1.6em;
+        color: #fff;
+        border:0;
+        border-radius: 4px;
+        cursor: pointer;
+
+      }
+    .active {
+          background: #00bfa5 !important;
+      }
+      form  span{
+        color: #00bfa5 !important;
+      }
+    </style>
+    <div class="container">
+        <div class="text-center">
+            <p style="font-size:40px; color: #fff;" class=" p-4 font-weight-bold">D3 Artist</p>
+            <p class="mt-2   font-weight-bold " style="font-size:20px; color: #fff;" >A fitness tracker for Pakistani Peoples</p>
+        </div>
+        <div class="row">
+          <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6 " >
+            <button data-activity="cycling" class="active">Cycling</button>
+            <button data-activity="running">Running</button>
+            <button data-activity="swimming">Swimming</button>
+            <button data-activity="walking">Walking</button>
+          </div>
+          <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6 " >
+            <div class="canvas" ></div>
+          </div>
+        </div>
+        <div class="row" >
+          <div class="col-12 col-md-12 col-lg-12 col-xl-12 col-sm-12 mt-5" >
+            <form class="text-center">
+              <p class="mt-2   font-weight-bold " style="font-size:20px; color: #fff;">How much <span>cycling</span> you have done today?  </p>
+              <input type="text" class="text-line"  id="cycling" placeholder="Distance in m" />
+              <p class="alert-danger error" ></p>
+            </form>
+          </div>
+        </div>
+    </div>
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js"></script>
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-analytics.js"></script>
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyCrJwDOd-Fu8R9i2NFTuk3adl49_5bdMME",
+    authDomain: "d3-firebase-1c3d6.firebaseapp.com",
+    databaseURL: "https://d3-firebase-1c3d6.firebaseio.com",
+    projectId: "d3-firebase-1c3d6",
+    storageBucket: "d3-firebase-1c3d6.appspot.com",
+    messagingSenderId: "776696333178",
+    appId: "1:776696333178:web:04004dafee1c4dace4ccc3",
+    measurementId: "G-9X0E1CZWNF"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+  let db = firebase.firestore()
+</script>
+    <script src="d3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.25.6/d3-legend.min.js" ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.9.1/d3-tip.min.js"></script>
+    <script src="index.js" ></script>
+    <script src="graph.js" ></script>
+
+  </body>
+</html>
