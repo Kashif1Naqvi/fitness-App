@@ -10,8 +10,17 @@ btns.forEach(btn=>(
      // get activity
      activity = e.target.dataset.activity
 
+     // removing activity and add active class
 
+     btns.forEach(btn=>btn.classList.remove("active"))
 
+     e.target.classList.add("active")
+    //  console.log(e.target.classList.add("active"));
+    //  // set input field id
+    //
+    input.setAttribute("id" , activity)
+    // console.log(input.setAttribute("id" , activity));
+    formAct.textContent = activity
 
    })
 
