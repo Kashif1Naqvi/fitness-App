@@ -18,16 +18,28 @@ const xAxisGroup = graph.append("g")
             .attr("transform","translate(0," + graphHeight + ")");
 const yAxisGroup = graph.append("g")
             .attr("class","y-axis");
-
+const path = graph.append("path")
+const line = d3.line()
+             .x(function(d){
+               return x(new Date(d.date))
+             })
+             .y(function(d){
+               return y(d.distance)
+             });
 const update = (data) => {
   data =  data.filter(item => item.activity == activity )
+  data.sort((a,b)=> new Date(a.date) - new Date(b.date))
   x.domain(d3.extent(data , d => new Date(d.date)));
   y.domain([0,d3.max(data , d => d.distance)]);
 
   const circle = graph.selectAll("circle")
                       .data(data)
         circle.exit().remove()
-
+          path.data([data])
+            .attr("fill","none")
+            .attr("stroke","#00bfa5")
+            .attr("stroke-width",2)
+            .attr("d",line)
        circle
             .attr("cx",d=>x(new Date(d.date) ))
             .attr("cy",d=>y(d.distance))
@@ -39,6 +51,7 @@ const update = (data) => {
        .attr("cx",d=>x(new Date(d.date) ))
        .attr("cy",d=>y(d.distance))
        .attr("fill","#fff");
+
 
 const xAxis = d3.axisBottom(x)
                 .ticks(6)
