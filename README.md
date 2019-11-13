@@ -1,5 +1,5 @@
 # fitness-App
-fitness App in d3js+firebase 
+fitness App in d3js v5 +firebase 
 See the Demo :https://bl.ocks.org/Kashif1Naqvi/raw/f4c8c9842fb7521eaa64a62460723c10/8fa579a119d4f0d3aadadc5d9bcd6ba0963167ac/
 
 Fitness tracker is baisicaly create for peoples fitness Asstimation, you walk daily or some time 
